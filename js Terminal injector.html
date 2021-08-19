@@ -1,0 +1,87 @@
+<html><head></head><body bgcolor="black" id="here">
+</body></html>
+<script>
+   function Terminal_window(sizeX, sizeY, where){
+     // global
+     var code = document.createElement("textarea");
+     var posT = 0; // position condition
+
+     var bod = document.getElementById(where);
+     var ter_win = document.createElement("div");
+     ter_win.style.position = "fixed";
+     ter_win.style.left = "6px";
+     ter_win.style.top = "6px";
+     ter_win.style.backgroundColor = "#111";
+     ter_win.style.border = "1px solid #f00";
+     ter_win.style.height = sizeY+"px";
+     ter_win.style.width = sizeX+"px";
+     ter_win.style.color="#bbb";
+     ter_win.style.opacity = "0.8";
+     ter_win.style.zIndex = 120;
+
+     var option = document.createElement("div");
+     option.style.position = "absolute";
+     option.style.top = "0px";
+     option.style.right = "0px";
+     option.style.width = "150px";
+     option.style.height = "30px";
+     option.style.border = "1px solid #fff";
+
+           var reset = document.createElement("button");
+           var run = document.createElement("button");
+           run.style.position = "absolute";
+           run.style.height = "30px"
+           run.style.width = "60px";
+           run.style.top ="0px";
+           run.style.backgroundColor = "#99f";
+           run.style.left="0px";
+           run.style.fontSize = "9px";
+           run.appendChild(document.createTextNode("Run"));
+           run.onclick = function(){eval(code.value);};
+
+           reset.style.position = "absolute";
+           reset.style.height = "30px"
+           reset.style.top ="0px";
+           reset.style.width = "60px";
+           reset.style.left="60px";
+           reset.style.fontSize = "9px";
+           reset.style.backgroundColor = "#99f";
+           reset.appendChild(document.createTextNode("Reset"));
+           reset.onclick = function(){code.value = "";};
+
+           var move = document.createElement("button");
+           move.style.position = "absolute";
+           move.style.right = "0px";
+           move.style.background = "#f00";
+           move.style.height = "30px";
+           move.style.width = "30px";
+           move.onclick = function(){
+             if(posT==0){posT=1;}else{posT=0;}
+           }
+           move.onmousemove = function(){
+             if(posT==1){
+                ter_win.style.top = (event.clientY-15)+"px";
+                ter_win.style.left = (event.clientX-sizeX+15)+"px";
+             }
+           }
+
+     option.appendChild(move);
+     option.appendChild(run);
+     option.appendChild(reset);
+
+     code.style.position = "absolute";
+     code.style.color = "#fff";
+     code.style.backgroundColor = "#111";
+     code.style.top = "0px";
+     code.style.left = "0px";
+     code.style.height = sizeY+"px";
+     code.style.width = sizeX+"px";
+     code.style.fontSize = "30px";
+
+     ter_win.appendChild(code);
+     ter_win.appendChild(option);
+     bod.appendChild(ter_win);
+   }
+
+window.onload =  Terminal_window(window.innerWidth/2, window.innerHeight/2, "here");
+</script>

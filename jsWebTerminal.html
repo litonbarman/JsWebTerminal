@@ -1,0 +1,56 @@
+<html><body bgcolor="black"><div id="can" style="height:20px;width:50px;color:red;"></div>
+<div  id="ter" style="position:absolute;border:1px solid green;height:400px;width:400px;top:39px;left:39px;">
+  <div onclick="removeIT()" style="position:absolute;background:#f00;height:20px;width:19px;right:0px;top:0px;"></div>
+  <div onclick="runIT()" style="position:absolute;background:#0f0;height:20px;width:19px;right:41px;top:0px;"></div>
+  <textarea id="code" name="name" rows="8" cols="80" style="z-index:99999;width:400px;height:400px;background:rgba(0,0,0,0.6);color:#fff;font-size:20;"></textarea>
+</div>
+<div id="but" style="background:#77f;position:absolute;top:40px;left:400px;height:20px;width:20px;" onclick="setIT()"></div>
+</body></html>
+<script type="text/javascript">
+  var con = 0;
+
+  function setIT(){
+    if(con==1){
+      con=0;
+    }
+    else{
+      con=1;
+    }
+    document.getElementById("ter").style.top = document.getElementById("but").offsetTop-1;
+    document.getElementById("ter").style.left = document.getElementById("but").offsetLeft-360;
+  }
+
+window.onmousemove = function(){
+  if(con==1){
+    document.getElementById("can").innerHTML = event.clientX+","+event.clientY;
+
+    document.getElementById("but").style.top = (event.clientY-10)+"px";
+    document.getElementById("but").style.left = (event.clientX-10)+"px";
+  }
+}
+
+function removeIT(){
+    document.getElementById("but").remove();
+    document.getElementById("ter").remove();
+}
+function runIT(){
+  eval(document.getElementById("code").value);
+  printIt();
+}
+
+function printIt(){
+  var here = document.getElementById("ter");
+  var consoleW = document.createElement("div");
+  var nodeed = document.createTextNode("dcdc");
+  consoleW.style.position = "absolute";
+  consoleW.style.bottom = "0px";
+  consoleW.style.left = "0px";
+  consoleW.style.height = "300px";
+  consoleW.style.width = "398px";
+  consolew.style.color = "#f0f";
+  consoleW.style.background ="red";
+  consoleW.style.zIndex = "9999999";
+  consoleW.appendChild(nodeed);
+  here.appendChild(consoleW);
+}
+</script>
